@@ -21,13 +21,14 @@ engine.
 
 ## Run it
 
-```powershell
-pip install opencv-python numpy mediapipe
+```bash
+pip install -r requirements.txt
 python air_canvas.py
 ```
 
 The MediaPipe hand-landmarker model file (`hand_landmarker.task`) is included in
-this repository, so nothing downloads at first run.
+this repository, so nothing downloads at first run. The script resolves the model
+relative to its own location, so you can launch it from any directory.
 
 ## Honest notes on the design
 

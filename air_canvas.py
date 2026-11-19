@@ -2,6 +2,8 @@
 
 import cv2
 import numpy as np
+from pathlib import Path
+
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
 import mediapipe as mp
@@ -82,7 +84,12 @@ def main():
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
-    model_path = 'hand_landmarker.task'
+    # Resolve the bundled model next to this file so the script works from any
+    # working directory, not just the repo root.
+    model_path = str(Path(__file__).with_name('hand_landmarker.task'))
+    if not Path(model_path).exists():
+        print(f'Error: model file not found at {model_path}')
+        return
     base_options = python.BaseOptions(model_asset_path=model_path)
     options = vision.HandLandmarkerOptions(
         base_options=base_options,
